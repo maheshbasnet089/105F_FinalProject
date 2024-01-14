@@ -3,7 +3,7 @@ const app = express()
 
 // alternative --
 // const app = require("express")()
-
+require("./model/index")
 // telling nodejs to set its view engine to ejs 
 app.set('view engine','ejs')
 
