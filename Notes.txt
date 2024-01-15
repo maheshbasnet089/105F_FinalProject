@@ -16,3 +16,8 @@ sano bug --> 1.1.2
 
 Yesma semver(Semantic versioning) 
 
+CRUD operation 
+CREATE READ UPDATE DELETE 
+
+
+
