@@ -12,12 +12,20 @@ app.use(express.urlencoded({extended : true}))
 
 
 // HOME PAGE 
-app.get("/",(req,res)=>{
-    res.render("home")
+app.get("/",async (req,res)=>{
+    // blogs table bata data(row) nikalnu paryo ani home page lai pass garnu paryo 
+   const blogsTableBlogs =  await blogs.findAll() 
+   
+    res.render("home",{blogs : blogsTableBlogs})
 })
 
 app.get("/addblog",(req,res)=>{
     res.render("addBlog")
+})
+
+app.get("/blogs",async(req,res)=>{
+   const blogsData = await blogs.findAll()
+    res.send("Data will show here ")
 })
 
 app.post("/addblog",async(req,res)=>{
@@ -27,15 +35,18 @@ app.post("/addblog",async(req,res)=>{
     // const subTitle = req.body.subTitle 
     // const description = req.body.description
     const {title,subTitle,description} = req.body
+    if(!title || !subTitle || !description){
+        return res.send("Please provide title, subtitle,description")
+    }
     
     // inserting into blogs tables 
        await blogs.create({
+           subTitle : subTitle, 
+           description :description,
             title : title,
-            subTitle : subTitle, 
-            description :description
         })
 
-        res.send("Blog added successfully")
+        res.redirect("/")
 })
 
 
