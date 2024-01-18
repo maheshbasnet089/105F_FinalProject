@@ -50,7 +50,28 @@ app.post("/addblog",async(req,res)=>{
 })
 
 
+// single blog
+app.get("/blog/:id",async(req,res)=>{
+    const id = req.params.id
+    // const foundData = await blogs.findByPk(id)  returns object
+    const foundData = await blogs.findAll({ // 
+        where : {
+            id : id
+        }
+    })
+    console.log(foundData)
+    res.render("singleBlog",{blog : foundData})
+})
 
+app.get("/delete/:id",async (req,res)=>{
+    const id = req.params.id 
+    await blogs.destroy({
+        where : {
+            id : id
+        }
+    })
+    res.redirect("/")
+})
 
 const PORT = 3000
 

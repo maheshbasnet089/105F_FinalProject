@@ -62,16 +62,16 @@
 
    <%- include("navbar") %>
 
-   <button><a href="/blogs">Get Blogs</a></button>
+
     <section>
-       <% blogs.forEach((blog)=>{ %>
+    
         <div class="card">
-            <h2><%- blog.title  %></h2>
-            <h4><%- blog.subTitle  %></h4>
-            <p><%- blog.description %></p>
-            <a href="/blog/<%-blog.id %>">See More</a>
+            <h2><%- blog[0].title %></h2>
+            <h4><%- blog[0].subTitle %></h4>
+            <p><%- blog[0].description %></p>
+           <button><a href="/delete/<%- blog[0].id %>">Delete Me</a></button>
         </div>
-      <% }) %>
+
         
 
     </section>
