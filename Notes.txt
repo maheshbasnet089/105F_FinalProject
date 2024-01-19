@@ -19,5 +19,9 @@ Yesma semver(Semantic versioning)
 CRUD operation 
 CREATE READ UPDATE DELETE 
 
+To start Xampp on Mac :
+
+sudo /Applications/XAMPP/xamppfiles/xampp start
+
 
 

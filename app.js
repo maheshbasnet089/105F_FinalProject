@@ -73,6 +73,34 @@ app.get("/delete/:id",async (req,res)=>{
     res.redirect("/")
 })
 
+
+app.get("/update/:id",async (req,res)=>{
+    const id = req.params.id
+    const blog = await blogs.findByPk(id)
+    res.render("updateBlog",{id ,blog})
+})
+
+app.post("/update/:id",async(req,res)=>{
+    const {id} = req.params
+    const {title,subTitle,description} = req.body 
+    await blogs.update({
+        title : title,
+        subTitle : subTitle,
+        description : description
+    },{
+        where : {
+            id : id
+        }
+    })
+    res.redirect("/blog/" + id)
+
+})
+
+
+
+
+
+
 const PORT = 3000
 
 app.listen(PORT,()=>{
