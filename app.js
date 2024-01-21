@@ -1,6 +1,11 @@
 const express = require("express")
 const { blogs } = require("./model/index")
+const  {storage,multer}  = require("./middleware/multerConfig")
+
+const upload = multer({storage: storage})
+
 const app = express()
+
 
 // alternative --
 // const app = require("express")()
@@ -28,8 +33,8 @@ app.get("/blogs",async(req,res)=>{
     res.send("Data will show here ")
 })
 
-app.post("/addblog",async(req,res)=>{
-
+app.post("/addblog",upload.single('image'),async(req,res)=>{
+    console.log(req.file)
 
     // const title = req.body.title 
     // const subTitle = req.body.subTitle 
