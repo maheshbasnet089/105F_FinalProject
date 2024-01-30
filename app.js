@@ -3,6 +3,7 @@ require("dotenv").config()
 const app = express()
 
 const blogRoute = require('./routes/blogRoute')
+const userRoute = require("./routes/userRoute")
 
 
 // alternative --
@@ -20,6 +21,7 @@ app.use(express.static("./public/styles"))
 // /hello + /addBlog = /hello/addBlog 
 // /hello + / = /hello/
 app.use("",blogRoute)
+app.use("",userRoute)
 
 
 const PORT = 3000
