@@ -5,7 +5,7 @@ const { users } = require("../model")
 
 exports.isAuthenticated = async (req,res,next)=>{
   const token =   req.cookies.token
-  console.log(token)
+
   if(!token || token === null || token === undefined){
     return res.redirect("/login")
   }

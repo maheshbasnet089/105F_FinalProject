@@ -19,6 +19,7 @@
             <h2><%- blog.title  %></h2>
             <h4><%- blog.subTitle  %></h4>
             <p><%- blog.description %></p>
+            <p>Author : <%- blog.user.username %></p>
             <a href="/blog/<%-blog.id %>">See More</a>
         </div>
       <% }) %>

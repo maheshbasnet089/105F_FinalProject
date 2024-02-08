@@ -19,6 +19,12 @@ app.use(express.static("./uploads/"))
 app.use(express.static("./public/styles"))
 
 
+app.use((req,res,next)=>{
+    res.locals.currentUser = req.cookies.token
+    next()
+})
+
+
 // /hello + /addBlog = /hello/addBlog 
 // /hello + / = /hello/
 app.use("",blogRoute)
