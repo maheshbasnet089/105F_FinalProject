@@ -4,6 +4,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const blogRoute = require('./routes/blogRoute')
 const userRoute = require("./routes/userRoute")
+const sendSMS = require("./services/sendSMS")
 
 
 // alternative --
@@ -18,6 +19,7 @@ app.use(express.static("./uploads/"))
 // app.use(express.static(__dirname+'/public/' ))
 app.use(express.static("./public/styles"))
 
+sendSMS()
 
 app.use((req,res,next)=>{
     res.locals.currentUser = req.cookies.token
