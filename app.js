@@ -19,7 +19,7 @@ app.use(express.static("./uploads/"))
 // app.use(express.static(__dirname+'/public/' ))
 app.use(express.static("./public/styles"))
 
-sendSMS()
+// sendSMS()
 
 app.use((req,res,next)=>{
     res.locals.currentUser = req.cookies.token
