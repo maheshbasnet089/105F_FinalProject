@@ -15,11 +15,14 @@ exports.registerUser = async(req,res)=>{
         email : email, 
         password : bcrypt.hashSync(password,12)
     })
+    req.flash('success','Registered Successfully')
     res.redirect("/login")
 }
 
 exports.renderLoginForm = (req,res)=>{
-    res.render("login")
+    const [error] = req.flash('error')
+    const [success] = req.flash('success')
+    res.render("login",{error,success})
 }
 
 // [] 
@@ -49,7 +52,8 @@ exports.loginUser = async(req,res)=>{
        res.cookie('token',token)
        res.redirect("/")
       }else{
-        res.send("Email or Password is invalid")
+        req.flash('error','Invalid Email or Password')
+        res.redirect('/login')
       }
     }
 }
@@ -61,7 +65,8 @@ exports.logOutUser = (req,res)=>{
 }
 
 exports.forgotPassword = (req,res)=>{
-    res.render("forgotPassword")
+    const [error] = req.flash('error')
+    res.render("forgotPassword",{error})
 }
 
 exports.handleForgotPassword = async (req,res)=>{
@@ -77,7 +82,8 @@ exports.handleForgotPassword = async (req,res)=>{
     })
     console.log(userData)
     if(userData.length === 0){
-        return res.send("No user with that email")
+        req.flash("error","No user with that email")
+        res.redirect("/forgotPassword")
     }
     const generatedOtp =  Math.floor(Math.floor(10000 * Math.random(99999)))
     
@@ -97,8 +103,8 @@ exports.handleForgotPassword = async (req,res)=>{
 
 exports.renderOtpForm = (req,res)=>{
    const email =  req.query.email
- 
-    res.render("otpForm",{email : email})
+    const [error] = req.flash('error')
+    res.render("otpForm",{email : email,error})
 }
 
 exports.verifyOtp  = async(req,res)=>{
@@ -112,7 +118,9 @@ exports.verifyOtp  = async(req,res)=>{
         }
     })
     if(data.length === 0 ){
-        return res.send("Invalid Otp")
+        req.flash('error',"Invalid otp")
+        res.redirect("/otpForm?email=" + email)
+        return
     }
     const currentTime = Date.now()
     const otpGeneratedTime = data[0].otpGeneratedTime

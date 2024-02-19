@@ -5,8 +5,16 @@ const cookieParser = require('cookie-parser')
 const blogRoute = require('./routes/blogRoute')
 const userRoute = require("./routes/userRoute")
 const sendSMS = require("./services/sendSMS")
+const session = require("express-session")
+const flash = require("connect-flash")
 
 
+app.use(session({
+    secret : "hellothisissecret",
+    resave : false,
+    saveUninitialized : false
+}))
+app.use(flash())
 // alternative --
 // const app = require("express")()
 require("./model/index")
