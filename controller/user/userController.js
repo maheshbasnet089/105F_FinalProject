@@ -9,6 +9,7 @@ exports.renderRegisterForm = (req,res)=>{
 
 exports.registerUser = async(req,res)=>{
  
+  
     const {username,email,password} = req.body 
     await users.create({
         username : username,
@@ -17,6 +18,9 @@ exports.registerUser = async(req,res)=>{
     })
     req.flash('success','Registered Successfully')
     res.redirect("/login")
+  
+    res.send(e.message)
+
 }
 
 exports.renderLoginForm = (req,res)=>{
