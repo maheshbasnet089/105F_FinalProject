@@ -75,7 +75,17 @@
             <button><a href="/update/<%- blog[0].id %>">Update Me</a></button>
         <% } %>
         </div>
+        <ul>
+            <% comments.forEach((comment)=>{ %>
+                <li><%- comment.commentMessage %> - <%- comment.user.email %></li>
+            <% }) %>
+        </ul>
+     <form action="/comment" method="post">
+        <input type="text" name="commentMessage" placeholder="Enter your comment">
+        <input type="hidden" name="blogId" value="<%- blog[0].id %>">
 
+        <button type="submit">Comment</button>
+     </form>
         
 
     </section>

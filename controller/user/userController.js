@@ -19,7 +19,7 @@ exports.registerUser = async(req,res)=>{
     req.flash('success','Registered Successfully')
     res.redirect("/login")
   
-    res.send(e.message)
+    
 
 }
 
@@ -55,6 +55,7 @@ exports.loginUser = async(req,res)=>{
        })
        res.cookie('token',token)
        res.redirect("/")
+      
       }else{
         req.flash('error','Invalid Email or Password')
         res.redirect('/login')

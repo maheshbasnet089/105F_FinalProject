@@ -4,6 +4,7 @@ const app = express()
 const cookieParser = require('cookie-parser')
 const blogRoute = require('./routes/blogRoute')
 const userRoute = require("./routes/userRoute")
+const commentRoute = require("./routes/commentRoute")
 const sendSMS = require("./services/sendSMS")
 const session = require("express-session")
 const flash = require("connect-flash")
@@ -39,6 +40,7 @@ app.use((req,res,next)=>{
 // /hello + / = /hello/
 app.use("",blogRoute)
 app.use("",userRoute)
+app.use("",commentRoute)
 
 
 const PORT = 3000
