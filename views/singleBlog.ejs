@@ -78,6 +78,9 @@
         <ul>
             <% comments.forEach((comment)=>{ %>
                 <li><%- comment.commentMessage %> - <%- comment.user.email %></li>
+                <% if(comment.userId === currentUserId){ %>
+                    <a href="/deletecomment/<%-comment.id%>">Delete</a>
+               <% } %>
             <% }) %>
         </ul>
      <form action="/comment" method="post">

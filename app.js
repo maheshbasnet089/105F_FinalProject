@@ -8,6 +8,9 @@ const commentRoute = require("./routes/commentRoute")
 const sendSMS = require("./services/sendSMS")
 const session = require("express-session")
 const flash = require("connect-flash")
+const {promisify} = require("util")
+
+const jwt = require("jsonwebtoken")
 
 
 app.use(session({
@@ -30,8 +33,12 @@ app.use(express.static("./public/styles"))
 
 // sendSMS()
 
-app.use((req,res,next)=>{
+app.use(async (req,res,next)=>{
     res.locals.currentUser = req.cookies.token
+    if(req.cookies.token){
+       const data  =  await promisify(jwt.verify)(req.cookies.token,process.env.secretKey)
+       res.locals.currentUserId = data.id
+    }
     next()
 })
 
