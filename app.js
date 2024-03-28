@@ -50,7 +50,7 @@ app.use("",userRoute)
 app.use("",commentRoute)
 
 
-const PORT = 3000
+const PORT = 4000
 
 app.listen(PORT,()=>{
     console.log(`NodeJs project has started at port ${PORT} ` )
